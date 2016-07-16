@@ -1,0 +1,86 @@
+﻿@*@model IEnumerable<ContactManagement.Core.Entity.Contact>*@
+
+@model PagedList.IPagedList<ContactManagement.Core.Entity.Contact>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Contact";
+}
+<nav class="contact-nav">
+    <ul class="nav nav-tabs nav-justified">
+        @*<li class="active"><a href="#"><span class="glyphicon glyphicon-book"></span> Contact List</a></li>
+            <li><a href="search.html"><span class="glyphicon glyphicon-search"></span> Search</a></li>*@
+        <li class="active"><a href="@Url.Action("Index", "Home")"><span class="glyphicon glyphicon-search"></span>Contact List</a></li>
+        <li><a href="@Url.Action("Index", "Search")"><span class="glyphicon glyphicon-search"></span> Search</a></li>
+    </ul>
+</nav>
+<section class="contact-body box-left visible">
+    <div class="vbox">
+        <div class="row-row">
+            <div class="cell">
+                <div class="cell-inner">
+                    <article class="contact-list contact-content has-aside">
+                        <div class="panel">
+                            <div class="panel-heading">
+                                @*<h5 class="panel-title" id="A">A</h5>*@
+                            </div>
+                            <div class="panel-body">
+                                <div class="list-group">
+                                    @foreach (var item in Model)
+                                    {
+                                        <a href="@Url.Action("Details", "Home", new {id = item.Id.ToString()})" class="list-group-item">
+                                            <h4 class="list-group-item-heading ellipsis">@Html.DisplayFor(modelItem => item.Name)</h4>
+                                            <p class="list-group-item-text text-muted ellipsis">@Html.DisplayFor(modelItem => item.Phone)</p>
+                                        </a>
+                                    }
+                                </div>
+                            </div>
+                            <div class="panel-footer">
+                                @Html.PagedListPager(Model, page => Url.Action("Index", new {page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, @class = "pagination pagination-sm"}))
+                                @*Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount*@
+                            </div>
+                        </div>
+                    </article>
+                    
+                    <aside class="contact-index contact-content">
+                        <ul class="list-unstyled text-center text-bold">
+                            <li><a href="@Url.Action("Index", "Home")" class="text-muted">#</a></li>
+                            <li><a href="@Url.Action("Index", "Home","A")" class="text-strong">A</a></li>
+                            <li><a href="@Url.Action("Index", "Home","A")" class="text-muted">B</a></li>
+                            <li><a href="@Url.Action("Index", "Home","A")" class="text-strong">C</a></li>
+                            <li><a href="@Url.Action("Index", "Home","A")" class="text-strong">D</a></li>
+                            <li><a href="@Url.Action("Index", "Home","A")" class="text-strong">E</a></li>
+                            <li><a href="@Url.Action("Index", "Home","A")" class="text-muted">F</a></li>
+                            <li><a href="@Url.Action("Index", "Home","A")" class="text-muted">G</a></li>
+                            <li><a href="@Url.Action("Index", "Home","A")" class="text-muted">H</a></li>
+                            <li><a href="@Url.Action("Index", "Home","A")" class="text-muted">I</a></li>
+                            <li><a href="@Url.Action("Index", "Home","A")" class="text-muted">J</a></li>
+                            <li><a href="@Url.Action("Index", "Home","A")" class="text-muted">K</a></li>
+                            <li><a href="@Url.Action("Index", "Home","A")" class="text-muted">L</a></li>
+                            <li><a href="@Url.Action("Index", "Home","A")" class="text-strong">M</a></li>
+                            <li><a href="@Url.Action("Index", "Home","A")" class="text-muted">N</a></li>
+                            <li><a href="@Url.Action("Index", "Home","A")" class="text-muted">O</a></li>
+                            <li><a href="@Url.Action("Index", "Home","A")" class="text-muted">P</a></li>
+                            <li><a href="@Url.Action("Index", "Home","A")" class="text-muted">Q</a></li>
+                            <li><a href="@Url.Action("Index", "Home","A")" class="text-muted">R</a></li>
+                            <li><a href="@Url.Action("Index", "Home","A")" class="text-muted">S</a></li>
+                            <li><a href="@Url.Action("Index", "Home","A")" class="text-muted">T</a></li>
+                            <li><a href="@Url.Action("Index", "Home")" class="text-muted">U</a></li>
+                            <li><a href="@Url.Action("Index", "Home")" class="text-muted">V</a></li>
+                            <li><a href="@Url.Action("Index", "Home")" class="text-muted">W</a></li>
+                            <li><a href="@Url.Action("Index", "Home")" class="text-muted">X</a></li>
+                            <li><a href="@Url.Action("Index", "Home")" class="text-muted">Y</a></li>
+                            <li><a href="@Url.Action("Index", "Home")" class="text-muted">Z</a></li>
+                        </ul>
+                    </aside>
+                </div>
+            </div>
+        </div>
+        @*<button type="button" class="btn btn-default btn-lg btn-block" onclick="changeClasses(); toggleClass()">
+                <span class="glyphicon glyphicon-plus-sign"></span> Add new contact
+            </button>*@
+        <p>
+            @Html.ActionLink("Add new contact", "Create")
+        </p>
+    </div>
+</section>
